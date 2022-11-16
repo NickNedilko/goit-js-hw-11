@@ -1,0 +1,31 @@
+.search-form {
+  text-align: center;
+}
+.gallery {
+  margin-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.photo-card {
+  width: 360px;
+  outline: 2px solid gray;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.info {
+  display: flex;
+  text-align: center;
+}
+
+.load-more {
+  display: none;
+  padding: 10px;
+  margin: 20px auto;
+  border: 2px solid gray;
+  border-radius: 5px;
+}
