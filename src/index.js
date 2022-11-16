@@ -55,6 +55,7 @@ function matchQuerry(data) {
   }
   if (data.config.params.page === 1) {
     matchFound(data.data.total);
+    console.log('sadsfdgnfhgdfd');
   }
 
   renderCard(data);
@@ -104,7 +105,7 @@ function renderCard(data) {
 
   refs.cardList.insertAdjacentHTML('beforeend', card);
   refs.loadMoreBtn.style.display = 'block';
-  simpleLightBox.refresh();
+  // simpleLightBox.refresh();
 }
 
 refs.cardList.addEventListener('click', onGalleryImageClick);
