@@ -42,16 +42,14 @@ async function apiLoadData(querry) {
     },
   };
 
-  // options.params.q = querry;
-  // options.params.page = page;
-
   const data = await axios.get(`https://pixabay.com/api/`, options);
 
   matchQuerry(data);
 }
 
 function matchQuerry(data, searchQuerry) {
-  if (data.data.total === 0 || searchQuerry === '') {
+  console.log(searchQuerry);
+  if (data.data.total === 0) {
     noMatchFind();
     return;
   }
