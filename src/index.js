@@ -1,5 +1,6 @@
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 import axios from 'axios';
 
 const refs = {
@@ -24,42 +25,43 @@ console.log(searchQuerry);
 
 function onLoadMoreBtnClick() {
   page += 1;
-  // console.log(page);
+  console.log(page);
   apiLoadData(searchQuerry, page);
 }
-// console.log('🚀 ~ searchData', searchData);
 
-async function apiLoadData(querry, page) {
+async function apiLoadData(querry) {
   const options = {
     params: {
+      q: querry,
       key: '31317963-93e1be27f3dc3526dd5fff289',
       image_type: 'photo',
       orientation: 'horizontal',
       safesearch: true,
-      per_page: 4,
-      page: 1,
+      per_page: 40,
+      page: page,
     },
   };
 
-  options.params.q = querry;
-  options.params.page = page;
+  // options.params.q = querry;
+  // options.params.page = page;
 
   const data = await axios.get(`https://pixabay.com/api/`, options);
-  // console.log(data);
+
   matchQuerry(data);
 }
 
 function matchQuerry(data) {
   if (data.data.total === 0) {
-    return noMatchFind();
+    noMatchFind();
+    return;
   }
+
   if (data.config.params.page === 1) {
     matchFound(data.data.total);
-    console.log('sadsfdgnfhgdfd');
   }
 
   renderCard(data);
-  if (data.data.hits.length < 4) {
+  if (data.data.hits.length < 40) {
     refs.loadMoreBtn.style = 'none';
     return Notiflix.Notify.success(
       `We're sorry, but you've reached the end of search results.`
@@ -68,22 +70,21 @@ function matchQuerry(data) {
 }
 
 function noMatchFind() {
-  return Notiflix.Notify.failure(
+  Notiflix.Notify.failure(
     ` Sorry, there are no images matching your search query. Please try again.`
   );
 }
 
 function matchFound(value) {
-  return Notiflix.Notify.success(`Hooray! We found ${value} images.`);
+  Notiflix.Notify.success(`Hooray! We found ${value} images.`);
 }
 
 function renderCard(data) {
   let card = data.data.hits
     .map(element => {
       return `
-      <a href="${element.largeImageURL}"></a>
     <div class="photo-card">
-  <img src="${element.webformatURL}" alt="${element.tags}" width=360 height=300 loading="lazy" />
+  <img src="${element.webformatURL}" alt="${element.tags}" width=450 height=350 loading="lazy" />
   <div class="info">
     <p class="info-item">
       <b>Likes: ${element.likes}</b>
@@ -106,18 +107,19 @@ function renderCard(data) {
   refs.cardList.insertAdjacentHTML('beforeend', card);
   refs.loadMoreBtn.style.display = 'block';
   // simpleLightBox.refresh();
+  // simpleLightBox.on('show.simplelightbox');
 }
 
-refs.cardList.addEventListener('click', onGalleryImageClick);
+// refs.cardList.addEventListener('click', onGalleryImageClick);
 
-function onGalleryImageClick(evt) {
-  evt.preventDefault();
-  if (evt.target.nodeName !== 'IMG') {
-    return;
-  }
-  item.on('show.simplelightbox');
-}
-let item = new SimpleLightbox('.gallery a', {
+// function onGalleryImageClick(evt) {
+//   evt.preventDefault();
+//   if (evt.target.nodeName !== 'IMG') {
+//     return;
+//   }
+//   simpleLightBox.on('show.simplelightbox');
+// }
+let simpleLightBox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: '250',
 });
