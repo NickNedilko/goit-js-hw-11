@@ -50,8 +50,8 @@ async function apiLoadData(querry) {
   matchQuerry(data);
 }
 
-function matchQuerry(data) {
-  if (data.data.total === 0) {
+function matchQuerry(data, searchQuerry) {
+  if (data.data.total === 0 || searchQuerry === '') {
     noMatchFind();
     return;
   }
@@ -82,8 +82,9 @@ function matchFound(value) {
 function renderCard(data) {
   let card = data.data.hits
     .map(element => {
+      console.log(element);
       return `
-      <a class="gallery__link" href="${data.data.hits.largeImageURL}">
+      <a class="gallery__link" href="${element.largeImageURL}">
     <div class="photo-card">
   <img src="${element.webformatURL}" alt="${element.tags}" width=450 height=350 loading="lazy" />
   <div class="info">
