@@ -66,7 +66,7 @@ function matchQuerry(data, searchQuerry) {
   renderCard(data);
   if (data.data.hits.length < 40) {
     refs.loadMoreBtn.style = 'none';
-    return Notiflix.Notify.success(
+    Notiflix.Notify.success(
       `We're sorry, but you've reached the end of search results.`
     );
   }
