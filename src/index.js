@@ -106,7 +106,7 @@ function renderCard(data) {
 
   refs.cardList.insertAdjacentHTML('beforeend', card);
   refs.loadMoreBtn.style.display = 'block';
-  // simpleLightBox.refresh();
+  simpleLightBox.refresh();
   // simpleLightBox.on('show.simplelightbox');
 }
 
