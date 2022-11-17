@@ -18,6 +18,11 @@ function onSearchSubmit(e) {
   e.preventDefault();
   refs.cardList.innerHTML = '';
   searchQuerry = e.currentTarget.searchQuery.value;
+  if (searchQuerry === '') {
+    return Notiflix.Notify.warning(
+      `We're sorry, but you need to enter something in search line if you want to receive search results.`
+    );
+  }
   apiLoadData(searchQuerry);
 }
 refs.loadMoreBtn.addEventListener('click', onLoadMoreBtnClick);
