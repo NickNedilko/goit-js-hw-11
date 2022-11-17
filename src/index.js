@@ -83,6 +83,7 @@ function renderCard(data) {
   let card = data.data.hits
     .map(element => {
       return `
+      <a class="gallery__link" href="${data.data.hits.largeImageURL}">
     <div class="photo-card">
   <img src="${element.webformatURL}" alt="${element.tags}" width=450 height=350 loading="lazy" />
   <div class="info">
@@ -100,14 +101,13 @@ function renderCard(data) {
     </p>
   </div>
 </div>
-    `;
+</a> `;
     })
     .join('');
 
   refs.cardList.insertAdjacentHTML('beforeend', card);
   refs.loadMoreBtn.style.display = 'block';
   simpleLightBox.refresh();
-  // simpleLightBox.on('show.simplelightbox');
 }
 
 // refs.cardList.addEventListener('click', onGalleryImageClick);

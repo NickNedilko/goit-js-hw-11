@@ -16,6 +16,10 @@
   justify-content: center;
   gap: 16px;
 }
+.gallery__link {
+  color: #053912;
+  text-decoration: none;
+}
 
 .photo-card {
   width: 450px;
@@ -25,6 +29,7 @@
 }
 
 .info {
+  padding: 0 10px;
   display: flex;
   text-align: center;
   gap: 10px;
